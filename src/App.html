@@ -1,0 +1,27 @@
+<div>
+	<h1>Hello {title} from Web Component</h1>
+	<button on:click="fireEvent({data: 'Dummy Data'})">Fire an Event</button>
+</div>
+
+<script>
+	import  store from './store';
+
+	export default {
+		data() {
+			return {};
+		},
+		tag: 'my-app',
+
+		methods: {
+			fireEvent(value){
+				console.log("Event Fired !!!", value);
+			}
+		}
+	};
+</script>
+
+<style>
+	h1 {
+		color: blue;
+	}
+</style>
