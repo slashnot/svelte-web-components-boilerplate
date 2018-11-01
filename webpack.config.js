@@ -68,10 +68,15 @@ module.exports = {
 };
 
 if(prod || none){
-	module.exports.plugins.push(
-		new WebpackCopyAfterBuildPlugin({
-			"bundle":
-			"../../Svelte-in-react/src/bundle.js",
-		  })
-	)
+	/*
+	Enable the following code if you want to check the bundle in other frameworks like react.
+	For development run "npm run autobuild-dev"
+	This will copy the bundle to your react app. The file path is relative.
+	*/
+	// module.exports.plugins.push(
+	// 	new WebpackCopyAfterBuildPlugin({
+	// 		"bundle":
+	// 		"../../Svelte-in-react/src/bundle.js",
+	// 	  })
+	// )
 }
