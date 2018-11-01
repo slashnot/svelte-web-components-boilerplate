@@ -63,13 +63,6 @@ module.exports = {
 		new MiniCssExtractPlugin({
 			filename: '[name].css'
 		}),
-		// new CopyWebpackPlugin([
-		// 	{
-		// 		from: 'public/bundle.js',
-		// 		to: '../../Svelte-in-react/src/bundle.js',
-		// 		force: true
-		// 	}
-		// ]),
 	],
 	devtool: prod ? false : 'source-map'
 };
