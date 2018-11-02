@@ -1,22 +1,15 @@
 <div>
 	<h2>{$name}</h2>
 	<button on:click="getPosts()">Get Posts</button>
-	<ul>
-		{#each $posts as post}
-		<li>{post[id]}</li>
-		{:else}
-		<li>No posts :(</li>
-		{/each}
-	</ul>
-  <slot></slot>
+	<slot></slot>
 
-  <svelte:component this="{Content}" title="thing"/>
+	<svelte:component this="{Content}" title="thing" />
 </div>
 
 
 <script>
   import store from "./store";
-  import Content from "./Content.html";
+  import TextField from "./TextField.html";
 
   export default {
     tag: "app-child",
@@ -31,19 +24,20 @@
     },
 
     oncreate() {
-      console.log(this.children[1]);
       this.set({ id: this.children[0].getAttribute("resid") });
       this.set({ elm: this.children[1] });
-      
-      var temp = this.children[1]
-      var clon = temp.content.cloneNode(true);
-      console.log(clon.querySelector('h2'))
-      var tmpl = clon.querySelector('h2').innerText = "Hello"
-      document.body.appendChild(clon);
+
+      var temp = this.children[1];
+      this.store.on('posts', (val)=>{
+        val.map(post => {
+          var clon = temp.content.cloneNode(true);
+          var tmpl = (clon.querySelector("h2").innerText = post[this.children[0].getAttribute("resid")]);
+          return document.body.appendChild(clon);
+        });
+      })
     },
 
-    onupdate(){
-    },
+    onupdate() {},
 
     methods: {
       getPosts() {
@@ -52,6 +46,7 @@
           .then(posts => {
             console.log(posts);
             this.store.set({ posts });
+            this.store.fire("posts", posts);
           });
       }
     }
