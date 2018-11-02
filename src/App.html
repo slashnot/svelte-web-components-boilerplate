@@ -1,16 +1,21 @@
 <div>
 	<h1>Hello {title} from Web Component</h1>
 	<button on:click="changeProp({data: 'Dummy Data'})">Change Prop</button>
-	<app-child msg={msg}>
-		<h3>I am inside the slot from parent</h3>
-	</app-child>
+	<slot></slot>
 </div>
 
 <script>
+	import Child from "./Child.html";
+	
+	let elm = document.querySelector('app-child');
 	export default {
+	  oncreate() {
+			elm.on('eClick', (val)=>console.log(val));
+		},
 	  data() {
 	    return {
-	      msg: "I am the dynamic text from parent"
+	      msg: "I am the dynamic text from parent",
+	      done: false
 	    };
 	  },
 	  tag: "my-app",
@@ -18,7 +23,7 @@
 	    changeProp(value) {
 	      let count = 0;
 	      setInterval(() => {
-	        this.msg = "Msg Changed!!! - " + count++;
+	        elm.set({msg: "Msg Changed!!! - " + count++});
 	      }, 1000);
 	    }
 	  }

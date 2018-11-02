@@ -3,12 +3,19 @@
 	<slot>
 		This is from slot
 	</slot>
-  <button>Fire Event from Child</button>
+	<button on:click="handleClick('Some Data')">Fire Event from Child</button>
 </div>
 
 
 <script>
+  import store from "./store";
   export default {
     tag: "app-child",
+    methods: {
+      handleClick(e) {
+        this.fire("eClick", "Some data")
+      },
+      props: ['msg']
+    }
   };
 </script>
