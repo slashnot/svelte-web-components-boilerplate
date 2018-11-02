@@ -3,7 +3,8 @@
 	<slot>
 		This is from slot
 	</slot>
-	<button on:click="handleClick('Some Data')">Fire Event from Child</button>
+	<button on:click='$fire("eClick", "Some data")'>Fire Event from Child</button>
+  <p>{$name}</p>
 </div>
 
 
@@ -11,11 +12,7 @@
   import store from "./store";
   export default {
     tag: "app-child",
-    methods: {
-      handleClick(e) {
-        this.fire("eClick", "Some data")
-      },
+    store: () => store,
       props: ['msg']
-    }
   };
 </script>

@@ -1,32 +1,23 @@
 <div>
 	<h1>Hello {title} from Web Component</h1>
-	<button on:click="changeProp({data: 'Dummy Data'})">Change Prop</button>
 	<slot></slot>
+	<p>{$name}</p>
 </div>
 
 <script>
 	import Child from "./Child.html";
+	import store from './store';
 	
 	let elm = document.querySelector('app-child');
 	export default {
 	  oncreate() {
-			elm.on('eClick', (val)=>console.log(val));
+			const listener = this.store.on('eClick', ({ current }) => {
+				console.log("E-CLICK", this.store.get().name)
+			});
+			this.on('destroy', listener.cancel);
 		},
-	  data() {
-	    return {
-	      msg: "I am the dynamic text from parent",
-	      done: false
-	    };
-	  },
+		store: () => store,
 	  tag: "my-app",
-	  methods: {
-	    changeProp(value) {
-	      let count = 0;
-	      setInterval(() => {
-	        elm.set({msg: "Msg Changed!!! - " + count++});
-	      }, 1000);
-	    }
-	  }
 	};
 </script>
 
