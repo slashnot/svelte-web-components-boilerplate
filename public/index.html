@@ -1,5 +1,6 @@
 <!doctype html>
 <html>
+
 <head>
 	<meta charset='utf8'>
 	<meta name='viewport' content='width=device-width'>
@@ -9,15 +10,23 @@
 	<link rel='stylesheet' href='global.css'>
 	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/custom-elements/1.2.0/custom-elements.min.js"></script> -->
 	<script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.0.3/webcomponents-loader.js">
+
 	</script>
 	<!-- <script src="./shadow-dom.min.js"></script> -->
 	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/shadydom/1.1.0/shadydom.min.js"></script> -->
 </head>
 
 <body>
-	<my-app title='Users from Typicode' comp='React Comp'>
-		<app-child msg="Parent Slot">Child Slot</app-child>
+	<my-app data-test="Test" title='Users from Typicode' comp='React Comp'>
+		<app-child>
+			<app-content resid="title"></app-content>
+			<template id="content">
+				<h2>Flower</h2>
+			</template>
+		</app-child>
 	</my-app>
-	<script src='bundle.js'></script>
+	<script src='bundle.js'>
+	</script>
 </body>
+
 </html>

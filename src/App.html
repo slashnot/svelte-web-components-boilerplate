@@ -1,21 +1,13 @@
 <div>
 	<h1>Hello {title} from Web Component</h1>
 	<slot></slot>
-	<p>{$name}</p>
 </div>
 
 <script>
 	import Child from "./Child.html";
 	import store from './store';
 	
-	let elm = document.querySelector('app-child');
 	export default {
-	  oncreate() {
-			const listener = this.store.on('eClick', ({ current }) => {
-				console.log("E-CLICK", this.store.get().name)
-			});
-			this.on('destroy', listener.cancel);
-		},
 		store: () => store,
 	  tag: "my-app",
 	};
