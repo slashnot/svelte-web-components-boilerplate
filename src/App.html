@@ -1,25 +1,32 @@
 <div>
 	<h1>Hello {title} from Web Component</h1>
-	<button on:click="fireEvent({data: 'Dummy Data'})">Fire an Event</button>
+	<button on:click="changeProp({data: 'Dummy Data'})">Change Prop</button>
+	<app-child msg={msg}>
+		<h3>I am inside the slot from parent</h3>
+	</app-child>
 </div>
 
 <script>
 	export default {
-		data() {
-			return {};
-		},
-		tag: 'my-app',
-
-		methods: {
-			fireEvent(value){
-				console.log("Event Fired !!!", value);
-			}
-		}
+	  data() {
+	    return {
+	      msg: "I am the dynamic text from parent"
+	    };
+	  },
+	  tag: "my-app",
+	  methods: {
+	    changeProp(value) {
+	      let count = 0;
+	      setInterval(() => {
+	        this.msg = "Msg Changed!!! - " + count++;
+	      }, 1000);
+	    }
+	  }
 	};
 </script>
 
 <style>
 	h1 {
-		color: blue;
+	  color: blue;
 	}
 </style>
