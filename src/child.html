@@ -1,0 +1,21 @@
+<h2>I am a nested component</h2>
+<slot></slot>
+{#each users as user}
+    <li>{user.title}</li>
+{:else}
+    <li>No Users :(</li>
+{/each}
+
+
+<script>
+    export default {
+      tag: "app-child",
+        onstate({ changed, current, previous }) {
+			// this fires after oncreate, and after every state change
+			// once the DOM is synchronised with the data
+			console.log(`The State has been updated`, previous, current);
+            console.log(this._slots);
+            console.log(this.children);
+		},
+    };
+</script>
