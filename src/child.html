@@ -23,20 +23,6 @@
       };
     },
 
-    oncreate() {
-      this.set({ id: this.children[0].getAttribute("resid") });
-      this.set({ elm: this.children[1] });
-
-      var temp = this.children[1];
-      this.store.on('posts', (val)=>{
-        val.map(post => {
-          var clon = temp.content.cloneNode(true);
-          var tmpl = (clon.querySelector("h2").innerText = post[this.children[0].getAttribute("resid")]);
-          return document.body.appendChild(clon);
-        });
-      })
-    },
-
     onupdate() {},
 
     methods: {

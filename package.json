@@ -17,7 +17,7 @@
   },
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack",
-    "dev": "webpack-dev-server --mode development --watch --hot --open",
+    "dev": "webpack-dev-server --mode development --watch --hot",
     "start": "npm run dev",
     "autobuild-dev": "cross-env NODE_ENV=none webpack --watch"
   }

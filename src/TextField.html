@@ -11,20 +11,21 @@
 
     oncreate() {
       let arr = Array.from(this.children);
-      let strHtml = '', arrHtml;
+      let strHtml = "",
+        arrHtml;
+      this.innerHTML = '<h3>No ' + this.resid;
+      
 
-      arrHtml = arr.map(p => {
-        strHtml = strHtml + p.innerHTML;
+      this.store.on("posts", posts => {
+        this.innerHTML = '';
+        arrHtml = arr.map(p => {
+          strHtml = strHtml + p.innerHTML;
+        });
+        posts.map((post)=>{
+          var out = TemplateEngine(strHtml, post);
+          this.insertAdjacentHTML('beforeend', out);
+        })
       });
-      console.log(strHtml);
-      var out = TemplateEngine(strHtml, {
-        name:'Ram',
-        profile: {
-          age: '20'
-        }
-      });
-
-      document.querySelector("app-text").innerHTML = out;
     }
   };
 </script>
