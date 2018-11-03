@@ -1,0 +1,34 @@
+<h4>Grid List</h4>
+<ul>
+    {#each resource as user}
+        <li>
+            {user.name}
+        </li>
+    {:else}
+        <h4>No Users</h4>
+    {/each}
+</ul>
+<script>
+	import store from "../store";
+
+	export default {
+	  store: () => store,
+
+	  tag: "sl-grid-list",
+
+	  oncreate() {
+	    let listener = this.store.on("resource-loaded", res => {
+	      this.set({resource: res.data})
+	    });
+	    this.on("destroy", listener.cancel);
+      },
+      data(){
+          return {
+              resource: []
+          }
+      }
+	};
+</script>
+
+<style>
+</style>
