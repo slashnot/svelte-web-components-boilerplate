@@ -37,7 +37,7 @@ module.exports = {
 						emitCss: true,
 						hotReload: true,
 						customElement: true,
-						format: 'es'
+						format: 'es',
 					}
 				}
 			},

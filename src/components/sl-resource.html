@@ -1,0 +1,28 @@
+{$baseurl}/{source}
+<slot></slot>
+
+<script>
+	import store from "../store";
+
+	export default {
+	  store: () => store,
+
+	  tag: "sl-resource",
+
+	  props: ["source"],
+
+	  oncreate() {
+	    let url = `${this.store.get().baseurl}/${this.get().source}`;
+		
+		//   Fetch the resource
+	    let resource = fetch(url);
+	    resource.then(res => res.json()).then(data => {
+	      console.log(data);
+	      this.store.fire("resource-loaded", { source: this.get().source, data });
+		});
+	  },
+	};
+</script>
+
+<style>
+</style>

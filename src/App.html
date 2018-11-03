@@ -1,20 +1,32 @@
 <div>
-	<h1>Hello {title} from Web Component</h1>
+	<h2>Simple CRUD App</h2>
 	<slot></slot>
 </div>
 
 <script>
-	import Child from "./Child.html";
-	import store from './store';
-	
+	import store from "./store";
+
 	export default {
-		store: () => store,
-	  tag: "my-app",
+    store: () => store,
+    
+    tag: "sl-crud",
+    
+    props: ["baseurl"],
+
+    oncreate(){
+      this.store.set({baseurl: this.baseurl});
+    }
+    
 	};
 </script>
 
 <style>
-	h1 {
-	  color: blue;
-	}
+  h2 {
+    color: rgb(255, 255, 255);
+    padding: 15px;
+    font-weight: 600;
+    border: solid 1px rgb(149, 149, 182);
+    background: rgb(75, 135, 213);
+    margin: 0 0 20px;
+  }
 </style>

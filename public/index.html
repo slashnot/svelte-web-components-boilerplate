@@ -17,15 +17,11 @@
 </head>
 
 <body>
-	<my-app data-test="Test" title='Users from Typicode' comp='React Comp'>
-		<app-child>
-			<app-text emptyText="Posts" source="%-this.title-%">
-				<ul>
-					<li>%-this.title-%</li>
-				</ul>
-			</app-text>
-		</app-child>
-	</my-app>
+	<sl-crud baseUrl="https://jsonplaceholder.typicode.com">
+		<sl-resource source="users">
+			<h3>Resource Elm</h3>
+		</sl-resource>
+	</sl-crud>
 	<script src='bundle.js'>
 
 	</script>
