@@ -1,4 +1,5 @@
-<p>APP Content - {resid} :)</p>
+<p>APP Content - {resid} :) <slot></slot>
+</p>
 
 <script>
   import store from "./store";
@@ -10,14 +11,20 @@
 
     oncreate() {
       let arr = Array.from(this.children);
-      let strHtml, arrHtml;
+      let strHtml = '', arrHtml;
 
       arrHtml = arr.map(p => {
-        this.shadowRoot.appendChild(p);
-        strHtml = p.outerHTML;
-        return strHtml.split("{")[1].split("}")[0];
+        strHtml = strHtml + p.innerHTML;
       });
-      console.log(arrHtml);
+      console.log(strHtml);
+      var out = TemplateEngine(strHtml, {
+        name:'Ram',
+        profile: {
+          age: '20'
+        }
+      });
+
+      document.querySelector("app-text").innerHTML = out;
     }
   };
 </script>
