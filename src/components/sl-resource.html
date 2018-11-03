@@ -17,8 +17,11 @@
 		//   Fetch the resource
 	    let resource = fetch(url);
 	    resource.then(res => res.json()).then(data => {
-	      console.log(data);
-	      this.store.fire("resource-loaded", { source: this.get().source, data });
+		  let resource = { source: this.get().source, data };
+		  this.store.set({resource});
+
+		  console.log(this.store)
+	      this.store.fire("resource-loaded", resource);
 		});
 	  },
 	};
