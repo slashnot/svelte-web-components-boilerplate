@@ -19,8 +19,12 @@
 <body>
 	<my-app data-test="Test" title='Users from Typicode' comp='React Comp'>
 		<app-child>
-			<app-text emptytext="Posts" source="${this.title}">
-				<ul><li title=${this.title}> ${this.title}</li></ul>
+			<app-text emptyText="Posts" source="${this.title}">
+				<template>
+					<ul>
+						<li> ${this.title}</li>
+					</ul>
+				</template>
 			</app-text>
 		</app-child>
 	</my-app>
