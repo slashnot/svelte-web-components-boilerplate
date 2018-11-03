@@ -73,10 +73,10 @@ if(prod || none){
 	For development run "npm run autobuild-dev"
 	This will copy the bundle to your react app. The file path is relative.
 	*/
-	// module.exports.plugins.push(
-	// 	new WebpackCopyAfterBuildPlugin({
-	// 		"bundle":
-	// 		"../../Svelte-in-react/src/bundle.js",
-	// 	  })
-	// )
+	module.exports.plugins.push(
+		new WebpackCopyAfterBuildPlugin({
+			"bundle":
+			"../../react-app/src/bundle.js",
+		  })
+	)
 }

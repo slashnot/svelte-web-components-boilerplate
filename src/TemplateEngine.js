@@ -1,5 +1,5 @@
 let TemplateEngine = function (tpl, data) {
-    let re = /\${([^}']+)?}/g, code = 'let r=[];\n', cursor = 0, match;
+    let re = /%-([^-%']+)?-%/g, code = 'let r=[];\n', cursor = 0, match;
     let add = function(line, js) {
         js? code += 'r.push(' + line + ');\n' :
             code += 'r.push("' + line.replace(/"/g, '\\"') + '");\n';

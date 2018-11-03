@@ -19,12 +19,10 @@
 <body>
 	<my-app data-test="Test" title='Users from Typicode' comp='React Comp'>
 		<app-child>
-			<app-text emptyText="Posts" source="${this.title}">
-				<template>
-					<ul>
-						<li> ${this.title}</li>
-					</ul>
-				</template>
+			<app-text emptyText="Posts" source="%-this.title-%">
+				<ul>
+					<li>%-this.title-%</li>
+				</ul>
 			</app-text>
 		</app-child>
 	</my-app>
