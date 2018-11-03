@@ -20,11 +20,8 @@
 	<my-app data-test="Test" title='Users from Typicode' comp='React Comp'>
 		<app-child>
 			<app-text resid="title" source="${pop.pop}">
-				<p>Hello, my name is '{this.name}' I'm '{this.profile.age}' years old.</p>
+				<p>Hello, my name is ${this.name} I'm ${this.profile.age} years old.</p>
 			</app-text>
-			<template id="content">
-				<h2>Flower</h2>
-			</template>
 		</app-child>
 	</my-app>
 	<script src='bundle.js'>
