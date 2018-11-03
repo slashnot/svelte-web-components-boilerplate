@@ -2,8 +2,7 @@
 	<h2>{$name}</h2>
 	<button on:click="getPosts()">Get Posts</button>
 	<slot></slot>
-
-	<svelte:component this="{Content}" title="thing" />
+	<!-- <svelte:component this="{TextField}" resid="thing" /> -->
 </div>
 
 
@@ -19,7 +18,8 @@
     data() {
       return {
         id: "",
-        elm: null
+        elm: null,
+        TextField
       };
     },
 

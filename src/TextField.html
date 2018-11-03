@@ -2,8 +2,22 @@
 
 <script>
   import store from "./store";
-export default {
-    tag:'app-text',
+  import { TemplateEngine } from "./TemplateEngine";
+
+  export default {
+    tag: "app-text",
     store: () => store,
-}
+
+    oncreate() {
+      let arr = Array.from(this.children);
+      let strHtml, arrHtml;
+
+      arrHtml = arr.map(p => {
+        this.shadowRoot.appendChild(p);
+        strHtml = p.outerHTML;
+        return strHtml.split("{")[1].split("}")[0];
+      });
+      console.log(arrHtml);
+    }
+  };
 </script>

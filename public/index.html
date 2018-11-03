@@ -19,7 +19,10 @@
 <body>
 	<my-app data-test="Test" title='Users from Typicode' comp='React Comp'>
 		<app-child>
-			<app-text resid="title"></app-text>
+			<app-text resid="title" source="${pop.pop}">
+				<h2>{post.title}</h2>
+				<img src = "{post.img}"/>
+			</app-text>
 			<template id="content">
 				<h2>Flower</h2>
 			</template>
