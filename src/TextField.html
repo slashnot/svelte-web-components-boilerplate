@@ -1,4 +1,4 @@
-<p>APP Content - {resid} :) <slot></slot>
+<p>APP Content - :) <slot></slot>
 </p>
 
 <script>
@@ -9,11 +9,13 @@
     tag: "app-text",
     store: () => store,
 
+    props:['emptytext'],
+
     oncreate() {
       let arr = Array.from(this.children);
       let strHtml = "",
         arrHtml;
-      this.innerHTML = '<h3>No ' + this.resid;
+      this.innerHTML = '<h3>No ' + this.emptytext;
       
 
       this.store.on("posts", posts => {

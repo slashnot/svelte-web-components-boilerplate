@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="en">
 
 <head>
 	<meta charset='utf8'>
@@ -19,7 +19,7 @@
 <body>
 	<my-app data-test="Test" title='Users from Typicode' comp='React Comp'>
 		<app-child>
-			<app-text resid="title" source="${pop.pop}">
+			<app-text emptytext="Posts" source="${this.title}">
 				<ul><li title=${this.title}> ${this.title}</li></ul>
 			</app-text>
 		</app-child>
