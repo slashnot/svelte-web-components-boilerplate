@@ -1,33 +1,45 @@
 <h4>Grid List</h4>
-<ul>
-    {#each resource as user}
-        <li>
-            {user.name}
-        </li>
-    {:else}
-        <h4>No Users</h4>
-    {/each}
-</ul>
+
 <script>
-	import store from "../store";
+  import store from "../store";
+  import TemplateEngine from "../services/TemplateEngine";
 
-	export default {
-	  store: () => store,
+  export default {
+    store: () => store,
 
-	  tag: "sl-grid-list",
+    tag: "sl-grid-list",
 
-	  oncreate() {
-	    let listener = this.store.on("resource-loaded", res => {
-	      this.set({resource: res.data})
-	    });
-	    this.on("destroy", listener.cancel);
+        oncreate() {
+      let listener = this.store.on("resource-loaded", res => {
+        console.log(res)
+        // let elms = Array.from(this.children);
+
+        // elms.map((elm, id) => {
+        //   res.data.map((item) => {
+        //     elm.setAttribute('slrId', item.id);
+        //     console.log(elm, item.id)
+        //     // document.body.appendChild(elm)
+        //   });
+        // });
+      });
+      this.on("destroy", listener.cancel);
+    },
+
+    methods: {
+      renderTemplate() {
+        let tpl = this.innerHTML;
+        let tplHtml = TemplateEngine(tpl, { name: "Ram", profile: { age: 30 } });
+        this.innerHTML = tplHtml;
       },
-      data(){
-          return {
-              resource: []
-          }
+
+      htmlToElement(html) {
+        var template = document.createElement("template");
+        html = html.trim(); // Never return a text node of whitespace as the result
+        template.innerHTML = html;
+        return template.content.childNodes;
       }
-	};
+    }
+  };
 </script>
 
 <style>

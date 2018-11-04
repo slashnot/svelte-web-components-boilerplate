@@ -15,6 +15,4 @@ let TemplateEngine = function (tpl, data) {
     return new Function(code.replace(/[\r\t\n]/g, '')).apply(data);
 }
 
-export {
-    TemplateEngine
-}
+export default TemplateEngine;
