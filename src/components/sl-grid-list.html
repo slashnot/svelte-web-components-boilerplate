@@ -1,4 +1,8 @@
-<h4>Grid List</h4>
+<div>
+  <h3>Grid List</h3>
+  <h5>id</h5>
+  {@html htmlChildren}
+</div>
 
 <script>
   import store from "../store";
@@ -7,40 +11,38 @@
   export default {
     store: () => store,
 
-    tag: "sl-grid-list",
-
-        oncreate() {
-      let listener = this.store.on("resource-loaded", res => {
-        console.log(res)
-        // let elms = Array.from(this.children);
-
-        // elms.map((elm, id) => {
-        //   res.data.map((item) => {
-        //     elm.setAttribute('slrId', item.id);
-        //     console.log(elm, item.id)
-        //     // document.body.appendChild(elm)
-        //   });
-        // });
-      });
-      this.on("destroy", listener.cancel);
+    data() {
+      return {
+        htmlChildren: ''
+      }
     },
 
-    methods: {
-      renderTemplate() {
-        let tpl = this.innerHTML;
-        let tplHtml = TemplateEngine(tpl, { name: "Ram", profile: { age: 30 } });
-        this.innerHTML = tplHtml;
-      },
+    tag: "sl-grid-list",
 
-      htmlToElement(html) {
-        var template = document.createElement("template");
-        html = html.trim(); // Never return a text node of whitespace as the result
-        template.innerHTML = html;
-        return template.content.childNodes;
-      }
+    oncreate() {
+      console.log(this.options.target = this)
+      let listener = this.store.on("resource-loaded", res => {
+        let elmArr = Array.from(this.children);
+
+        // Clear the inner HTML
+        this.innerHTML = "";
+
+        // Set field id to iterate
+        let htmlArr = elmArr.map(elm => {
+          elm.setAttribute('slrField', this.parentElement.getAttribute('source'));
+          return elm;
+        })
+        this.set({
+          htmlChildren: htmlArr[0].outerHTML
+        });
+      });
+      this.on("destroy", listener.cancel);
     }
   };
 </script>
 
 <style>
+  h5 {
+    color: rebeccapurple;
+  }
 </style>

@@ -1,4 +1,4 @@
-<p>{resid}</p>
+<p>{$baseurl}</p>
 
 <script>
     import store from "../store";
@@ -8,10 +8,11 @@
       tag: "sl-text-field",
       props: ["resid"],
 
-      data() {
-        return {
-        };
-      },
+      oncreate() {
+        let listener = this.store.on("resource-loaded", res => {
+        });
+        this.on("destroy", listener.cancel);
+      }
     };
 </script>
 

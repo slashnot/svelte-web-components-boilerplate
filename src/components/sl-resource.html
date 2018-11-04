@@ -5,25 +5,29 @@
 	import store from "../store";
 
 	export default {
-	  store: () => store,
+		store: () => store,
 
-	  tag: "sl-resource",
+		tag: "sl-resource",
 
-	  props: ["source"],
+		props: ["source"],
 
-	  oncreate() {
-	    let url = `${this.store.get().baseurl}/${this.get().source}`;
-		
-		//   Fetch the resource
-	    let resource = fetch(url);
-	    resource.then(res => res.json()).then(data => {
-		  let resource = { source: this.get().source, data };
-		  this.store.set({resource});
+		oncreate() {
+			let url = `${this.store.get().baseurl}/${this.get().source}`;
 
-		  console.log(this.store)
-	      this.store.fire("resource-loaded", resource);
-		});
-	  },
+			//   Fetch the resource
+			let resource = fetch(url);
+			resource.then(res => res.json()).then(data => {
+				let resource = {
+					source: this.get().source,
+					data
+				};
+				this.store.set({
+					resource
+				});
+
+				this.store.fire("resource-loaded", resource);
+			});
+		},
 	};
 </script>
 
