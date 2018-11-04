@@ -1,18 +1,21 @@
-<p>{$baseurl}</p>
+<div class="item">
+  <h3>{title}</h3>
+  {#each $resource.data as item}
+    <div>{item[resid]}</div>
+  {/each}
+</div>
 
 <script>
-    import store from "../store";
+  import store from "../store";
 
-    export default {
-      store: () => store,
-      tag: "sl-text-field",
-      props: ["resid"],
+  export default {
+    store: () => store,
+    tag: "sl-text-field",
+    props: ["resid", "title"],
 
-      oncreate() {
-        let listener = this.store.on("resource-loaded", res => {
-        });
-        this.on("destroy", listener.cancel);
-      }
-    };
+    oncreate() {
+      let listener = this.store.on("resource-loaded", res => {});
+      this.on("destroy", listener.cancel);
+    },
+  };
 </script>
-

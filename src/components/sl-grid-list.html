@@ -1,7 +1,8 @@
-<div>
-  <h3>Grid List</h3>
-  <h5>id</h5>
-  {@html htmlChildren}
+<h3>Grid List</h3>
+<div class="list">
+  {#each htmlChildren as child}
+  {@html child}
+  {/each}
 </div>
 
 <script>
@@ -13,27 +14,27 @@
 
     data() {
       return {
-        htmlChildren: ''
+        htmlChildren: []
       }
     },
 
     tag: "sl-grid-list",
 
     oncreate() {
-      console.log(this.options.target = this)
       let listener = this.store.on("resource-loaded", res => {
         let elmArr = Array.from(this.children);
-
+        let htmlArr = [];
         // Clear the inner HTML
         this.innerHTML = "";
 
         // Set field id to iterate
-        let htmlArr = elmArr.map(elm => {
+        htmlArr = elmArr.map(elm => {
           elm.setAttribute('slrField', this.parentElement.getAttribute('source'));
-          return elm;
+          return elm.outerHTML;
         })
+
         this.set({
-          htmlChildren: htmlArr[0].outerHTML
+          htmlChildren: htmlArr
         });
       });
       this.on("destroy", listener.cancel);
@@ -42,7 +43,8 @@
 </script>
 
 <style>
-  h5 {
-    color: rebeccapurple;
+  div.list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
   }
 </style>
