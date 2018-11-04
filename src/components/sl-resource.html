@@ -16,16 +16,19 @@
 
 			//   Fetch the resource
 			let resource = fetch(url);
-			resource.then(res => res.json()).then(data => {
-				let resource = {
-					source: this.get().source,
-					data
-				};
+			let collection = {
+				source: this.get().source,
+			}
+			resource.then((res) => {
+				collection.promise = res;
+				return res.json();
+			}).then(data => {
+				collection.data = data;
 				this.store.set({
-					resource
+					resource: collection
 				});
 
-				this.store.fire("resource-loaded", resource);
+				this.store.fire("resource-loaded", collection);
 			});
 		},
 	};

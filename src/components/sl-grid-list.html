@@ -1,7 +1,7 @@
 <h3>Grid List</h3>
-<div class="list">
-  {#each htmlChildren as child}
-  {@html child}
+<div class="list" style="grid-template-columns: repeat({cols}, 1fr)">
+  {#each collection as item}
+    <div>{item.name}</div>
   {/each}
 </div>
 
@@ -14,7 +14,8 @@
 
     data() {
       return {
-        htmlChildren: []
+        collection: {},
+        cols:3
       }
     },
 
@@ -22,20 +23,8 @@
 
     oncreate() {
       let listener = this.store.on("resource-loaded", res => {
-        let elmArr = Array.from(this.children);
-        let htmlArr = [];
-        // Clear the inner HTML
-        this.innerHTML = "";
-
-        // Set field id to iterate
-        htmlArr = elmArr.map(elm => {
-          elm.setAttribute('slrField', this.parentElement.getAttribute('source'));
-          return elm.outerHTML;
-        })
-
-        this.set({
-          htmlChildren: htmlArr
-        });
+        this.set({collection: res.data});
+        this.set({cols: Array.from(this.children).length})
       });
       this.on("destroy", listener.cancel);
     }
@@ -45,6 +34,6 @@
 <style>
   div.list {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
   }
 </style>
